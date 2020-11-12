@@ -10,11 +10,82 @@
     <home-swiper :banners="banners"/>
     <HomeRecommend :recommends="recommends"/>
     <home-feature/>
+    <tab-control :titles="tabControlText" class="tab-control"/>
+
+    <ul>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+    </ul>
   </div>
 </template>
 
 <script>
 import NavBar from "@/components/common/navbar/NavBar";
+import TabControl from "@/components/context/tabControl/TabControl";
+
 import HomeSwiper from "@/views/home/homeChildComps/HomeSwiper";
 import HomeRecommend from "@/views/home/homeChildComps/HomeRecommend";
 import HomeFeature from "@/views/home/homeChildComps/HomeFeature";
@@ -22,11 +93,12 @@ import {getHomeMultidata} from "@/network/home";
 
 export default {
   name: "Home",
-  components: {HomeFeature, HomeRecommend, NavBar, HomeSwiper},
+  components: {TabControl, HomeFeature, HomeRecommend, NavBar, HomeSwiper},
   data() {
     return {
       banners: [],
       recommends: [],
+      tabControlText: ['流行', '新款', '精选']
     }
   },
   created() {
@@ -55,5 +127,10 @@ export default {
   right: 0;
   top: 0;
   z-index: 9;
+}
+
+.tab-control {
+  position: sticky;
+  top: 44px;
 }
 </style>
