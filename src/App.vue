@@ -5,6 +5,7 @@
 
 <script>
 import MainTabBar from "@/components/context/mainTabbar/MainTabBar";
+
 export default {
   components: {MainTabBar}
 }
@@ -12,5 +13,5 @@ export default {
 </script>
 
 <style>
-
+@import "assets/css/base.css";
 </style>

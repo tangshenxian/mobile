@@ -13,36 +13,36 @@
 </template>
 
 <script>
-  export default {
-    name: "TabBarItem",
-    props: {
-      path: String,
-      activeColor: {
-        type: String,
-        default: '#d4237a'
-      }
+export default {
+  name: "TabBarItem",
+  props: {
+    path: String,
+    activeColor: {
+      type: String,
+      default: '#d4237a'
+    }
+  },
+  computed: {
+    isActive() {
+      return this.$route.path.indexOf(this.path) !== -1;
     },
-    computed: {
-      isActive() {
-        return this.$route.path.indexOf(this.path) !== -1;
-      },
-      activeStyle() {
-        return this.isActive ? {color: this.activeColor} : {};
-      }
-    },
-    methods: {
-      itemClick() {
-        this.$router.push(this.path);
-      }
+    activeStyle() {
+      return this.isActive ? {color: this.activeColor} : {};
+    }
+  },
+  methods: {
+    itemClick() {
+      this.$router.push(this.path);
     }
   }
+}
 </script>
 
 <style scoped>
-  .tab-bar-item {
-    flex: 1;
-    text-align: center;
-    height: 49px;
-    font-size: 14px;
-  }
+.tab-bar-item {
+  flex: 1;
+  text-align: center;
+  height: 49px;
+  font-size: 14px;
+}
 </style>

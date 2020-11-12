@@ -50,21 +50,21 @@
 </template>
 
 <script>
-  import TabBar from "@/components/common/tabbar/TabBar";
-  import TabBarItem from "@/components/common/tabbar/TabBarItem";
+import TabBar from "@/components/common/tabbar/TabBar";
+import TabBarItem from "@/components/common/tabbar/TabBarItem";
 
-  export default {
-    name: "MainTabBar",
-    components: {TabBar, TabBarItem},
-  }
+export default {
+  name: "MainTabBar",
+  components: {TabBar, TabBarItem},
+}
 </script>
 
 <style scoped>
-  img {
-    width: 24px;
-    height: 24px;
-    margin-top: 3px;
-    margin-bottom: 2px;
-    vertical-align: middle;
-  }
+img {
+  width: 24px;
+  height: 24px;
+  margin-top: 3px;
+  margin-bottom: 2px;
+  vertical-align: middle;
+}
 </style>
