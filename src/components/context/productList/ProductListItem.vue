@@ -1,6 +1,8 @@
 <template>
   <div class="product-item">
-    <img :src="productItem.show.img"/>
+    <a :href="productItem.link">
+      <img :src="productItem.show.img"/>
+    </a>
     <div class="product-info">
       <p>{{ productItem.title }}</p>
       <span class="price">{{ productItem.price }}</span>
