@@ -1,6 +1,6 @@
 <template>
   <div class="products">
-    <product-list-item v-for="item in products" :product-item="item"/>
+    <product-list-item v-for="item in products" :product-item="item" @itemImageLoad="itemImageLoad"/>
   </div>
 </template>
 
@@ -18,6 +18,11 @@ export default {
       }
     }
   },
+  methods: {
+    itemImageLoad() {
+      this.$emit('itemImageLoad');
+    }
+  }
 }
 </script>
 

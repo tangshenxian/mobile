@@ -7,15 +7,18 @@
         </div>
       </template>
     </nav-bar>
-    <home-swiper :banners="banners"/>
-    <HomeRecommend :recommends="recommends"/>
-    <home-feature/>
-    <tab-control :titles="tabControlText" class="tab-control" @tabClick="tabClick"/>
-    <product-list :products="showProducts"/>
+    <scroll class="content" ref="scroll">
+      <home-swiper :banners="banners"/>
+      <HomeRecommend :recommends="recommends"/>
+      <home-feature/>
+      <tab-control :titles="tabControlText" class="tab-control" @tabClick="tabClick"/>
+      <product-list :products="showProducts" @itemImageLoad="itemImageLoad"/>
+    </scroll>
   </div>
 </template>
 
 <script>
+import Scroll from "@/components/common/scroll/Scroll";
 import NavBar from "@/components/common/navbar/NavBar";
 import TabControl from "@/components/context/tabControl/TabControl";
 import ProductList from "@/components/context/productList/ProductList";
@@ -27,7 +30,7 @@ import {getHomeMultidata, getHomeProducts} from "@/network/home";
 
 export default {
   name: "Home",
-  components: {TabControl, HomeFeature, HomeRecommend, NavBar, HomeSwiper, ProductList},
+  components: {TabControl, HomeFeature, HomeRecommend, NavBar, HomeSwiper, ProductList, Scroll},
   data() {
     return {
       banners: [],
@@ -75,7 +78,6 @@ export default {
     getHomeProducts(type) {
       const page = this.products[type].page + 1;
       getHomeProducts(type, page).then(res => {
-        console.log(res);
         this.products[type].list.push(...res.data.list);
         this.products[type].page += 1;
       });
@@ -96,6 +98,10 @@ export default {
           this.currentType = 'sell';
           break;
       }
+    },
+
+    itemImageLoad(){
+      this.$refs.scroll.refresh();
     }
   }
 }
@@ -104,6 +110,8 @@ export default {
 <style scoped>
 #home {
   padding-top: 44px;
+  height: 100vh;
+  position: relative;
 }
 
 .home-nav {
@@ -120,5 +128,14 @@ export default {
   position: sticky;
   top: 44px;
   z-index: 9;
+}
+
+.content {
+  position: absolute;
+  overflow: hidden;
+  top: 44px;
+  left: 0;
+  right: 0;
+  bottom: 49px;
 }
 </style>
