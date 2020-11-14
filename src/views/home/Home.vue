@@ -7,13 +7,19 @@
         </div>
       </template>
     </nav-bar>
-    <scroll class="content" ref="scroll">
+    <scroll class="content"
+            ref="scroll"
+            :probe-type="3"
+            :pull-up-load="true"
+            @position="backTop"
+            @pullingUp="loadMoreProduct">
       <home-swiper :banners="banners"/>
       <HomeRecommend :recommends="recommends"/>
       <home-feature/>
       <tab-control :titles="tabControlText" class="tab-control" @tabClick="tabClick"/>
       <product-list :products="showProducts" @itemImageLoad="itemImageLoad"/>
     </scroll>
+    <back-top @click="backTopClick" v-show="isShowBackTop"/>
   </div>
 </template>
 
@@ -22,6 +28,7 @@ import Scroll from "@/components/common/scroll/Scroll";
 import NavBar from "@/components/common/navbar/NavBar";
 import TabControl from "@/components/context/tabControl/TabControl";
 import ProductList from "@/components/context/productList/ProductList";
+import BackTop from "@/components/context/backTop/BackTop";
 
 import HomeSwiper from "@/views/home/homeChildComps/HomeSwiper";
 import HomeRecommend from "@/views/home/homeChildComps/HomeRecommend";
@@ -30,7 +37,7 @@ import {getHomeMultidata, getHomeProducts} from "@/network/home";
 
 export default {
   name: "Home",
-  components: {TabControl, HomeFeature, HomeRecommend, NavBar, HomeSwiper, ProductList, Scroll},
+  components: {TabControl, HomeFeature, HomeRecommend, NavBar, HomeSwiper, ProductList, Scroll, BackTop},
   data() {
     return {
       banners: [],
@@ -51,6 +58,7 @@ export default {
         }
       },
       currentType: 'pop',
+      isShowBackTop: false
     }
   },
   computed: {
@@ -80,6 +88,7 @@ export default {
       getHomeProducts(type, page).then(res => {
         this.products[type].list.push(...res.data.list);
         this.products[type].page += 1;
+        this.$refs.scroll.finishPullUp();
       });
     },
 
@@ -100,8 +109,20 @@ export default {
       }
     },
 
-    itemImageLoad(){
+    itemImageLoad() {
       this.$refs.scroll.refresh();
+    },
+
+    backTopClick() {
+      this.$refs.scroll.scrollTo(0, 0, 500);
+    },
+
+    backTop(position) {
+      this.isShowBackTop = (-position.y) > 1000;
+    },
+
+    loadMoreProduct() {
+      this.getHomeProducts(this.currentType);
     }
   }
 }
