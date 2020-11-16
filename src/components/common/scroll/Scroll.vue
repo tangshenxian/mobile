@@ -18,12 +18,6 @@ export default {
         return 0;
       }
     },
-    pullUpLoad: {
-      type: Boolean,
-      default() {
-        return false;
-      }
-    }
   },
   data() {
     return {
@@ -34,28 +28,19 @@ export default {
     this.scroll = new BScroll(this.$refs.wrapper, {
       click: true,
       probeType: this.probeType,
-      pullUpLoad: this.pullUpLoad
     });
 
     this.scroll.on('scroll', (position) => {
       this.$emit('position', position);
     });
-
-    this.scroll.on('pullingUp', () => {
-      this.$emit('pullingUp');
-    });
   },
   methods: {
     refresh() {
-      this.scroll.refresh();
+      this.scroll && this.scroll.refresh();
     },
 
     scrollTo(x, y, time = 300) {
-      this.scroll.scrollTo(x, y, time);
-    },
-
-    finishPullUp() {
-      this.scroll.finishPullUp();
+      this.scroll && this.scroll.scrollTo(x, y, time);
     }
   }
 }
