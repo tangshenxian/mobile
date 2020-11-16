@@ -10,7 +10,9 @@
     <scroll class="content"
             ref="scroll"
             :probe-type="3"
-            @position="backTop">
+            @position="backTop"
+            :pull-up-load="true"
+            @pullingUp="loadMoreProduct">
       <home-swiper :banners="banners"/>
       <HomeRecommend :recommends="recommends"/>
       <home-feature/>
@@ -86,6 +88,7 @@ export default {
       getHomeProducts(type, page).then(res => {
         this.products[type].list.push(...res.data.list);
         this.products[type].page += 1;
+        this.$refs.scroll.finishPullUp();
       });
     },
 
@@ -116,6 +119,10 @@ export default {
 
     backTop(position) {
       this.isShowBackTop = (-position.y) > 1000;
+    },
+
+    loadMoreProduct() {
+      this.getHomeProducts(this.currentType);
     }
   }
 }

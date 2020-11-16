@@ -14,10 +14,12 @@ export default {
   props: {
     probeType: {
       type: Number,
-      default() {
-        return 0;
-      }
+      default: 0
     },
+    pullUpLoad: {
+      type: Boolean,
+      default: false
+    }
   },
   data() {
     return {
@@ -28,11 +30,20 @@ export default {
     this.scroll = new BScroll(this.$refs.wrapper, {
       click: true,
       probeType: this.probeType,
+      pullUpLoad: this.pullUpLoad
     });
 
-    this.scroll.on('scroll', (position) => {
-      this.$emit('position', position);
-    });
+    if (this.probeType !== 1) {
+      this.scroll.on('scroll', (position) => {
+        this.$emit('position', position);
+      });
+    }
+
+    if (this.pullUpLoad) {
+      this.scroll.on('pullingUp', () => {
+        this.$emit('pullingUp');
+      });
+    }
   },
   methods: {
     refresh() {
@@ -41,6 +52,10 @@ export default {
 
     scrollTo(x, y, time = 300) {
       this.scroll && this.scroll.scrollTo(x, y, time);
+    },
+
+    finishPullUp() {
+      this.scroll && this.scroll.finishPullUp();
     }
   }
 }
