@@ -4,7 +4,7 @@
       <component :is="Component"/>
     </keep-alive>
   </router-view>
-  <main-tab-bar/>
+  <main-tab-bar v-show="$route.meta.isTurn"/>
 </template>
 
 <script>
