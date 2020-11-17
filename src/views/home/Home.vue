@@ -2,7 +2,7 @@
   <div id="home">
     <nav-bar class="home-nav">
       <template v-slot:center>
-        <div>
+        <div class="title-item">
           购物街
         </div>
       </template>
@@ -153,6 +153,10 @@ export default {
   /*right: 0;*/
   /*top: 0;*/
   /*z-index: 9;*/
+}
+
+.title-item {
+  flex: 1;
 }
 
 .tab-control {

@@ -1,8 +1,6 @@
 <template>
   <div class="product-item">
-    <a :href="productItem.link">
-      <img :src="productItem.show.img" @load="imageLoad"/>
-    </a>
+    <img :src="productItem.show.img" @load="imageLoad" @click="itemClick"/>
     <div class="product-info">
       <p>{{ productItem.title }}</p>
       <span class="price">{{ productItem.price }}</span>
@@ -25,6 +23,15 @@ export default {
   methods: {
     imageLoad() {
       this.$emit('itemImageLoad');
+    },
+
+    itemClick() {
+      this.$router.push({
+        path: '/detail',
+        query: {
+          id: this.productItem.iid
+        }
+      });
     }
   }
 }
